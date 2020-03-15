@@ -30,13 +30,31 @@ function App() {
     setTodos(todos.filter(todo => todo.id !== id));
   }
 
+  function handleComplete(id: string) {
+    setTodos(
+      todos.map(todo => {
+        if (todo.id === id) {
+          return {
+            ...todo,
+            completed: true
+          };
+        }
+        return todo;
+      })
+    );
+  }
+
   return (
     <div className="App">
       <main>
         <AddTodo onAddNewTodo={handleAddTodo} />
         {error && <p>{error}</p>}
 
-        <TodoList todos={todos} onDelete={handleDelete} />
+        <TodoList
+          todos={todos}
+          onDelete={handleDelete}
+          onComplete={handleComplete}
+        />
       </main>
     </div>
   );
