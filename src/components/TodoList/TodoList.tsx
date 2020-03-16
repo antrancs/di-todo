@@ -7,11 +7,13 @@ interface IProps {
   todos: Todo[];
   onDelete: (id: string) => void;
   onComplete: (id: string) => void;
+  onEdit: (id: string, newDesc: string) => boolean;
 }
 
 const TodoList: FunctionComponent<IProps> = ({
   todos,
   onDelete,
+  onEdit,
   onComplete
 }) => {
   function handleInputChange(id: string, checked: boolean) {
@@ -30,6 +32,7 @@ const TodoList: FunctionComponent<IProps> = ({
           key={todo.id}
           onDelete={onDelete}
           onInputChange={handleInputChange}
+          onEdit={onEdit}
         />
       ))}
     </li>

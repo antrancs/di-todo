@@ -8,14 +8,22 @@ function App() {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [error, setError] = useState('');
 
-  function handleAddTodo(description: string) {
-    const hasAdded = todos.find(todo => todo.description === description);
+  function checkIfItemHasAdded(desc: string) {
+    const hasAdded = todos.find(todo => todo.description === desc);
     if (hasAdded) {
       setError('Punkten har lagt til før');
-      return;
+      return true;
     }
 
     setError('');
+    return false;
+  }
+
+  function handleAddTodo(description: string) {
+    if (checkIfItemHasAdded(description)) {
+      return false;
+    }
+
     setTodos([
       ...todos,
       {
@@ -24,6 +32,8 @@ function App() {
         completed: false
       }
     ]);
+
+    return true;
   }
 
   function handleDelete(id: string) {
@@ -44,6 +54,26 @@ function App() {
     );
   }
 
+  function handleEdit(id: string, newDesc: string) {
+    if (checkIfItemHasAdded(newDesc)) {
+      return false;
+    }
+
+    setTodos(
+      todos.map(todo => {
+        if (todo.id === id) {
+          return {
+            ...todo,
+            description: newDesc
+          };
+        }
+        return todo;
+      })
+    );
+
+    return true;
+  }
+
   return (
     <main className="app-container">
       <AddTodo onAddNewTodo={handleAddTodo} />
@@ -53,6 +83,7 @@ function App() {
         todos={todos}
         onDelete={handleDelete}
         onComplete={handleComplete}
+        onEdit={handleEdit}
       />
     </main>
   );

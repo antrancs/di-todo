@@ -13,15 +13,42 @@
   font-style: italic;
   text-decoration: line-through;
   color: grey;
-  margin-bottom: -1px;
+}
+
+.delete-btn,
+.edit-btn,
+.cancel-edit-btn,
+.save-edit-btn {
+  border: none;
+  background: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.cancel-edit-btn,
+.save-edit-btn {
+  padding: 4px 8px;
+}
+
+.save-edit-btn {
+  background-color: #3ecf8e;
+  color: white;
+  margin-left: 4px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.delete-btn,
+.edit-btn {
+  padding: 0;
 }
 
 .delete-btn {
-  padding: 0;
-  border: none;
-  background: none;
-  cursor: pointer;
   color: red;
+}
+
+.cancel-edit-btn {
+  border: 1px solid rgba(0, 0, 0, 0.4);
 }
 
 .item-space {
@@ -30,4 +57,11 @@
 
 .item-desc {
   margin-left: 8px;
+  margin-right: 8px;
+}
+
+.edit-input {
+  padding: 8px;
+  width: 100%;
+  margin-right: 8px;
 }

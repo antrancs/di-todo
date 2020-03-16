@@ -3,15 +3,16 @@ import React, { FunctionComponent, useState } from 'react';
 import './AddTodo.css';
 
 interface IProps {
-  onAddNewTodo: (description: string) => void;
+  onAddNewTodo: (description: string) => boolean;
 }
 
 const AddTodo: FunctionComponent<IProps> = ({ onAddNewTodo }) => {
   const [text, setText] = useState('');
 
   function handleAddBtnClicked() {
-    onAddNewTodo(text);
-    setText('');
+    if (onAddNewTodo(text)) {
+      setText('');
+    }
   }
 
   return (
