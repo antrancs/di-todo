@@ -1,4 +1,6 @@
 import React, { useState, useMemo } from 'react';
+import { DragDropContext, DropResult } from 'react-beautiful-dnd';
+
 import './App.css';
 import Todo from './models/Todo';
 import AddTodo from './components/AddTodo/AddTodo';
@@ -92,6 +94,25 @@ function App() {
     setTodos(todos.filter(todo => !todo.completed));
   }
 
+  function reorder(list: Todo[], startIndex: number, endIndex: number) {
+    const result = Array.from(list);
+    const [removed] = result.splice(startIndex, 1);
+    result.splice(endIndex, 0, removed);
+
+    return result;
+  }
+
+  function onDragEnd(result: DropResult) {
+    // dropped outside the list
+    if (!result.destination) {
+      return;
+    }
+
+    const items = reorder(todos, result.source.index, result.destination.index);
+
+    setTodos(items);
+  }
+
   return (
     <main className="app-container">
       <AddTodo onAddNewTodo={handleAddTodo} />
@@ -102,12 +123,14 @@ function App() {
         onDeleteCompleted={handleDeleteCompleted}
       />
 
-      <TodoList
-        todos={filteredTodos}
-        onDelete={handleDelete}
-        onComplete={handleComplete}
-        onEdit={handleEdit}
-      />
+      <DragDropContext onDragEnd={onDragEnd}>
+        <TodoList
+          todos={filteredTodos}
+          onDelete={handleDelete}
+          onComplete={handleComplete}
+          onEdit={handleEdit}
+        />
+      </DragDropContext>
     </main>
   );
 }

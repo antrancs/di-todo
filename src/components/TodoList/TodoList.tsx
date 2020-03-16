@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from 'react';
+import { Droppable } from 'react-beautiful-dnd';
 
 import Todo from '../../models/Todo';
 import TodoItem from '../TodoItem/TodoItem';
@@ -26,17 +27,27 @@ const TodoList: FunctionComponent<IProps> = ({
   }
 
   return (
-    <li className="todo-list">
-      {todos.map(todo => (
-        <TodoItem
-          todo={todo}
-          key={todo.id}
-          onDelete={onDelete}
-          onInputChange={handleInputChange}
-          onEdit={onEdit}
-        />
-      ))}
-    </li>
+    <Droppable droppableId="droppable">
+      {(provided, snapshot) => (
+        <ul
+          className="todo-list"
+          {...provided.droppableProps}
+          ref={provided.innerRef}
+        >
+          {todos.map((todo, index) => (
+            <TodoItem
+              todo={todo}
+              key={todo.id}
+              onDelete={onDelete}
+              onInputChange={handleInputChange}
+              onEdit={onEdit}
+              index={index}
+            />
+          ))}
+          {provided.placeholder}
+        </ul>
+      )}
+    </Droppable>
   );
 };
 
