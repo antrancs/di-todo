@@ -10,8 +10,19 @@ const AddTodo: FunctionComponent<IProps> = ({ onAddNewTodo }) => {
   const [text, setText] = useState('');
 
   function handleAddBtnClicked() {
+    if (text.trim().length === 0) {
+      return;
+    }
+
     if (onAddNewTodo(text)) {
       setText('');
+    }
+  }
+
+  function handleInputKeydown(event: React.KeyboardEvent<HTMLInputElement>) {
+    if (event.key === 'Enter') {
+      // Enter
+      handleAddBtnClicked();
     }
   }
 
@@ -22,6 +33,7 @@ const AddTodo: FunctionComponent<IProps> = ({ onAddNewTodo }) => {
         placeholder="Hva vil du gjøre i dag?"
         value={text}
         onChange={event => setText(event.target.value)}
+        onKeyDown={handleInputKeydown}
       />
 
       <button
