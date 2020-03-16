@@ -19,7 +19,7 @@ const AddTodo: FunctionComponent<IProps> = ({ onAddNewTodo }) => {
     <div className="add-todo-wrapper">
       <input
         className="input-todo"
-        placeholder="Hva vil du gjøre i dag"
+        placeholder="Hva vil du gjøre i dag?"
         value={text}
         onChange={event => setText(event.target.value)}
       />

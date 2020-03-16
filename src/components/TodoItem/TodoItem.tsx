@@ -59,7 +59,10 @@ const TodoItem: FunctionComponent<IProps> = ({
             checked={completed}
             onChange={checked => onInputChange(id, checked)}
           />{' '}
-          <div className="item-desc"> {description}</div>
+          <div className="item-desc" data-testid="todo-item">
+            {' '}
+            {description}
+          </div>
         </>
       )}
 
