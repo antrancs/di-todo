@@ -14,6 +14,14 @@ const TodoList: FunctionComponent<IProps> = ({
   onDelete,
   onComplete
 }) => {
+  function handleInputChange(id: string, checked: boolean) {
+    if (!checked) {
+      return;
+    }
+
+    onComplete(id);
+  }
+
   return (
     <li>
       {todos.map(todo => (
@@ -21,7 +29,7 @@ const TodoList: FunctionComponent<IProps> = ({
           todo={todo}
           key={todo.id}
           onDelete={onDelete}
-          onComplete={onComplete}
+          onInputChange={handleInputChange}
         />
       ))}
     </li>

@@ -1,0 +1,33 @@
+.todo-item {
+  width: 100%;
+  background-color: white;
+  padding: 24px 16px;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+  line-height: 16px;
+}
+
+.todo-item--completed {
+  font-style: italic;
+  text-decoration: line-through;
+  color: grey;
+  margin-bottom: -1px;
+}
+
+.delete-btn {
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: red;
+}
+
+.item-space {
+  flex: 1;
+}
+
+.item-desc {
+  margin-left: 8px;
+}

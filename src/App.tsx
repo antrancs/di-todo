@@ -45,18 +45,16 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <main>
-        <AddTodo onAddNewTodo={handleAddTodo} />
-        {error && <p>{error}</p>}
+    <main className="app-container">
+      <AddTodo onAddNewTodo={handleAddTodo} />
+      {error && <p>{error}</p>}
 
-        <TodoList
-          todos={todos}
-          onDelete={handleDelete}
-          onComplete={handleComplete}
-        />
-      </main>
-    </div>
+      <TodoList
+        todos={todos}
+        onDelete={handleDelete}
+        onComplete={handleComplete}
+      />
+    </main>
   );
 }
 
