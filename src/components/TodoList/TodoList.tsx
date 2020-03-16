@@ -2,6 +2,7 @@ import React, { FunctionComponent } from 'react';
 
 import Todo from '../../models/Todo';
 import TodoItem from '../TodoItem/TodoItem';
+import './TodoList.css';
 
 interface IProps {
   todos: Todo[];
@@ -25,7 +26,7 @@ const TodoList: FunctionComponent<IProps> = ({
   }
 
   return (
-    <li>
+    <li className="todo-list">
       {todos.map(todo => (
         <TodoItem
           todo={todo}

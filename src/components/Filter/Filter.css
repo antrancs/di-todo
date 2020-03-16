@@ -1,0 +1,15 @@
+.filter-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.clear-btn {
+  border: none;
+  background: none;
+  text-transform: uppercase;
+  cursor: pointer;
+  color: #e91e63;
+  letter-spacing: 0.5px;
+  font-size: 14px;
+  padding: 0;
+}

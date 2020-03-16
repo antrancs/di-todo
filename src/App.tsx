@@ -1,12 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import Todo from './models/Todo';
 import AddTodo from './components/AddTodo/AddTodo';
 import TodoList from './components/TodoList/TodoList';
+import Filter, { FilterStatus } from './components/Filter/Filter';
 
 function App() {
   const [todos, setTodos] = useState<Todo[]>([]);
+  const [filteredTodos, setFilteredTodos] = useState(todos);
+  const [filterStatus, setFilterStatus] = useState(FilterStatus.All);
+
   const [error, setError] = useState('');
+
+  useEffect(() => {
+    switch (filterStatus) {
+      case FilterStatus.All:
+        setFilteredTodos(todos);
+        return;
+      case FilterStatus.Completed:
+        setFilteredTodos(todos.filter(todo => todo.completed));
+        return;
+      case FilterStatus.Incomplete:
+        setFilteredTodos(todos.filter(todo => !todo.completed));
+    }
+  }, [todos, filterStatus]);
 
   function checkIfItemHasAdded(desc: string) {
     const hasAdded = todos.find(todo => todo.description === desc);
@@ -74,13 +91,22 @@ function App() {
     return true;
   }
 
+  function handleDeleteCompleted() {
+    setTodos(todos.filter(todo => !todo.completed));
+  }
+
   return (
     <main className="app-container">
       <AddTodo onAddNewTodo={handleAddTodo} />
       {error && <p>{error}</p>}
 
+      <Filter
+        onFilterChange={setFilterStatus}
+        onDeleteCompleted={handleDeleteCompleted}
+      />
+
       <TodoList
-        todos={todos}
+        todos={filteredTodos}
         onDelete={handleDelete}
         onComplete={handleComplete}
         onEdit={handleEdit}
